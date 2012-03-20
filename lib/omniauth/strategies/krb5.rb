@@ -59,9 +59,7 @@ module OmniAuth
             return unless username && password
                         
             begin
-              @authentication_response = @krb5.get_init_creds_password(username_with_realm, password)
-            rescue Krb5Auth::Krb5::Exception
-              @authentication_response = false                          
+              @authentication_response = @krb5.get_init_creds_password(username_with_realm, password)          
             rescue => err
               @authentication_response = false               
             ensure
