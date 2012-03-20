@@ -1,0 +1,14 @@
+= OmniAuth::Krb5
+
+OmniAuth strategy for authenticating with Kerberos.
+
+Install manually or using Bundler:
+
+    gem 'omniauth-Krb5'
+
+Add Kerberos provider to omniauth builder:
+
+    use OmniAuth::Builder do
+      provider :krb5, "CUSTOM.REALM.COM"
+      # provider ...
+    end
