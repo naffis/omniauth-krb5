@@ -4,7 +4,7 @@ OmniAuth strategy for authenticating with Kerberos.
 
 Install manually or using Bundler:
 
-    gem 'omniauth-Krb5'
+    gem 'omniauth-krb5'
 
 Add Kerberos provider to omniauth builder:
 
