@@ -23,8 +23,15 @@ module OmniAuth
       end
 
       def callback_phase
-        return fail!(:invalid_credentials) if !authentication_response
-        super
+        begin
+          return fail!(:invalid_credentials) unless username && password
+          @krb5.get_init_creds_password(username_with_realm, password)          
+          super          
+        rescue Exception => e
+          return fail!(:invalid_credentials, e)
+        ensure
+          @krb5.close
+        end
       end
       
       uid do
@@ -52,22 +59,6 @@ module OmniAuth
 
         def password
           request['password']
-        end
-
-        def authentication_response
-          unless @authentication_response
-            return unless username && password
-                        
-            begin
-              @authentication_response = @krb5.get_init_creds_password(username_with_realm, password)          
-            rescue => err
-              @authentication_response = false               
-            ensure
-              @krb5.close
-            end
-          end
-
-          @authentication_response
         end
 
     end
